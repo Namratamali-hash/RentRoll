@@ -1,0 +1,491 @@
+{
+    "project_data": {
+        "activeDeployedSolutionId": "fe446707-8090-4157-94f9-03f42541ee54",
+        "createdAtMs": "1734516182000",
+        "creationBase": "NONE",
+        "dataMountPath": "ib-internal/namrata.mali_instabase.com/fs/Instabase Drive/aihub/0193d938-8a8c-70c3-ad0b-35e11e344039",
+        "description": "New project",
+        "extractionMode": "CLASSIFICATION",
+        "id": "0193d938-8a8c-70c3-ad0b-35e11e344039",
+        "llm": "gpt-3.5-turbo",
+        "name": "Copy of Rent Rolls App",
+        "owner": "1cbe01eb-357c-4941-83ae-bff11f6ffaeb",
+        "ownerPublicId": "namrata.mali_instabase.com",
+        "projectMountPath": "ib-internal/namrata.mali_instabase.com/fs/Instabase Drive/aihub/0193d938-8a8c-70c3-ad0b-35e11e344039",
+        "repoId": "84f45132-b057-4dc3-ac76-dab87dbb07e1",
+        "schemaVersion": "1",
+        "settings": {
+            "advanced_ocr": {
+                "isChangeLanguageType": false,
+                "isSelectCheckboxes": false,
+                "isSelectFileAsImage": false,
+                "isSelectTables": true,
+                "languageType": "standard",
+                "nativeExcelProcessing": true,
+                "pagesText": "",
+                "version": "v1"
+            }
+        },
+        "type": "BUILD",
+        "updatedAtMs": "1738599564000",
+        "workspace": "namrata.mali_instabase.com"
+    },
+    "project_schema": {
+        "Other": {
+            "class_id": "115361",
+            "description": "",
+            "fields": []
+        },
+        "Rent Roll": {
+            "class_id": "115360",
+            "description": "Rent details for a single property building",
+            "fields": [
+                {
+                    "data_type": "TEXT",
+                    "description": "return name of all the properties mentioned in \"id - name\" format",
+                    "field_id": "343509",
+                    "lines": [
+                        {
+                            "function_args": [],
+                            "function_id": null,
+                            "line_type": "PROMPT",
+                            "native_fn_name": null,
+                            "prompt": "Remove dash and everything present before dash.\nAvoid duplication."
+                        },
+                        {
+                            "function_args": [],
+                            "function_id": null,
+                            "line_type": "PROMPT",
+                            "native_fn_name": null,
+                            "prompt": "Avoid the item which only contains numbers."
+                        }
+                    ],
+                    "model_type": "ADVANCED",
+                    "name": "Property Name",
+                    "position": 0,
+                    "prompt": "Extract all Property Names from the rent roll document. It is also can be present as address.\nIf not present extract N/A.",
+                    "prompt_schema": null,
+                    "prompt_type": "advanced"
+                },
+                {
+                    "data_type": "TEXT",
+                    "description": "Rent Roll Date also found labelled 'As of Date'",
+                    "field_id": "343510",
+                    "lines": [
+                        {
+                            "function_args": [
+                                {
+                                    "data_type": "TEXT",
+                                    "name": "input__format",
+                                    "value": "\"\""
+                                },
+                                {
+                                    "data_type": "TEXT",
+                                    "name": "output__format",
+                                    "value": "\"mmddyyyy\""
+                                }
+                            ],
+                            "function_id": null,
+                            "line_type": "NATIVE",
+                            "native_fn_name": "format_date",
+                            "prompt": null
+                        }
+                    ],
+                    "model_type": "DEFAULT",
+                    "name": "Rent Roll Date",
+                    "position": 2,
+                    "prompt": "Rent Roll Date",
+                    "prompt_schema": null,
+                    "prompt_type": "basic"
+                },
+                {
+                    "data_type": "TEXT_LIST",
+                    "description": "Extract all building Ids from tables. These are present in the table and under \"Property\" column header.",
+                    "field_id": "343511",
+                    "lines": [
+                        {
+                            "function_args": [],
+                            "function_id": null,
+                            "line_type": "PROMPT",
+                            "native_fn_name": null,
+                            "prompt": "Remove Duplicates. \nRemove property name if extracted."
+                        }
+                    ],
+                    "model_type": "DEFAULT",
+                    "name": "Building ID",
+                    "position": 1,
+                    "prompt": "Building ID",
+                    "prompt_schema": null,
+                    "prompt_type": "basic"
+                },
+                {
+                    "data_type": "TEXT",
+                    "description": "Extract all tables from this document",
+                    "field_id": "343512",
+                    "lines": [
+                        {
+                            "function_args": [],
+                            "function_id": null,
+                            "line_type": "PROMPT",
+                            "native_fn_name": null,
+                            "prompt": "Give output as a single table. Add rows which contains integer in property column."
+                        }
+                    ],
+                    "model_type": "ADVANCED",
+                    "name": "Rent Roll Table",
+                    "position": 3,
+                    "prompt": "Extract all tables from this document.",
+                    "prompt_schema": null,
+                    "prompt_type": "advanced"
+                },
+                {
+                    "data_type": "TEXT",
+                    "description": "",
+                    "field_id": "343513",
+                    "lines": [
+                        {
+                            "function_args": [
+                                {
+                                    "data_type": "FIELD",
+                                    "name": "Rent_Roll_Table",
+                                    "value": "Rent Roll Table"
+                                }
+                            ],
+                            "function_id": 5369,
+                            "line_type": "UDF",
+                            "native_fn_name": null,
+                            "prompt": null
+                        }
+                    ],
+                    "model_type": "DEFAULT",
+                    "name": "Max Rent",
+                    "position": 4,
+                    "prompt": "",
+                    "prompt_schema": null,
+                    "prompt_type": "udf"
+                },
+                {
+                    "data_type": "TEXT",
+                    "description": "",
+                    "field_id": "343514",
+                    "lines": [
+                        {
+                            "function_args": [
+                                {
+                                    "data_type": "FIELD",
+                                    "name": "Rent_Roll_Table",
+                                    "value": "Rent Roll Table"
+                                }
+                            ],
+                            "function_id": 5370,
+                            "line_type": "UDF",
+                            "native_fn_name": null,
+                            "prompt": null
+                        }
+                    ],
+                    "model_type": "DEFAULT",
+                    "name": "Average Rent per SqFt",
+                    "position": 6,
+                    "prompt": "",
+                    "prompt_schema": null,
+                    "prompt_type": "udf"
+                },
+                {
+                    "data_type": "TEXT",
+                    "description": "",
+                    "field_id": "343515",
+                    "lines": [
+                        {
+                            "function_args": [
+                                {
+                                    "data_type": "FIELD",
+                                    "name": "Rent_Roll_Table",
+                                    "value": "Rent Roll Table"
+                                }
+                            ],
+                            "function_id": 5371,
+                            "line_type": "UDF",
+                            "native_fn_name": null,
+                            "prompt": null
+                        }
+                    ],
+                    "model_type": "DEFAULT",
+                    "name": "Min Rent",
+                    "position": 5,
+                    "prompt": "",
+                    "prompt_schema": null,
+                    "prompt_type": "udf"
+                },
+                {
+                    "data_type": "TEXT",
+                    "description": "",
+                    "field_id": "412196",
+                    "lines": [
+                        {
+                            "function_args": [
+                                {
+                                    "data_type": "FIELD",
+                                    "name": "Rent_Roll_Table",
+                                    "value": "Rent Roll Table"
+                                }
+                            ],
+                            "function_id": null,
+                            "line_type": "PROMPT",
+                            "native_fn_name": null,
+                            "prompt": "Find only minimum rent form \"Gross Rent\" column of \\ Rent Roll Table \\<br>"
+                        }
+                    ],
+                    "model_type": "DEFAULT",
+                    "name": "Minimun rent",
+                    "position": 7,
+                    "prompt": "",
+                    "prompt_schema": null,
+                    "prompt_type": "derived"
+                },
+                {
+                    "data_type": "TEXT",
+                    "description": "",
+                    "field_id": "412957",
+                    "lines": [
+                        {
+                            "function_args": [
+                                {
+                                    "data_type": "FIELD",
+                                    "name": "Rent_Roll_Table",
+                                    "value": "Rent Roll Table"
+                                }
+                            ],
+                            "function_id": null,
+                            "line_type": "PROMPT",
+                            "native_fn_name": null,
+                            "prompt": "Consider \"Gross Rent\" column of \\ Rent Roll Table \\ and extract maximum rent value from column."
+                        }
+                    ],
+                    "model_type": "DEFAULT",
+                    "name": "Maximum Rent",
+                    "position": 8,
+                    "prompt": "",
+                    "prompt_schema": null,
+                    "prompt_type": "derived"
+                }
+            ]
+        }
+    },
+    "project_udfs": {
+        "5369": {
+            "args": [
+                {
+                    "data_type": "FIELD",
+                    "name": "Rent_Roll_Table",
+                    "value": "Rent Roll Table"
+                }
+            ],
+            "code": "\n\ndef findMax(Rent_Roll_Table, context = {}, keys = {}, **kwargs):\n\timport re, json\n\t\n\tRent_Roll_Table = json.loads(Rent_Roll_Table)\n\t\n\trent_list = []\n\tfor row in Rent_Roll_Table:\n\t  gross_rent = row[\"Gross Rent\"]\n\t  if gross_rent in [\"null\", \"N/A\"] or not gross_rent:\n\t    continue\n\t  gross_rent = re.sub('[\\$),]', '', gross_rent)\n\t  gross_rent = re.sub('\\(', '-', gross_rent)\n\t  \n\t  try:\n\t    gross_rent = float(gross_rent)\n\t    rent_list.append(gross_rent)\n\t  except Exception as e:\n\t    print(e)\n\t\n\tresult = max(rent_list)\n\tresult = f'${result:,.2f}'\n\t\n\treturn result",
+            "docstring": null,
+            "function_code": "\timport re, json\n\t\n\tRent_Roll_Table = json.loads(Rent_Roll_Table)\n\t\n\trent_list = []\n\tfor row in Rent_Roll_Table:\n\t  gross_rent = row[\"Gross Rent\"]\n\t  if gross_rent in [\"null\", \"N/A\"] or not gross_rent:\n\t    continue\n\t  gross_rent = re.sub('[\\$),]', '', gross_rent)\n\t  gross_rent = re.sub('\\(', '-', gross_rent)\n\t  \n\t  try:\n\t    gross_rent = float(gross_rent)\n\t    rent_list.append(gross_rent)\n\t  except Exception as e:\n\t    print(e)\n\t\n\tresult = max(rent_list)\n\tresult = f'${result:,.2f}'\n\t\n\treturn result",
+            "id": 5369,
+            "lambda_udf_id": "v1:AWS_LAMBDA:8581666418:insaprd-use2-aihub-prd-docker-default-udf:8",
+            "most_recent_results_path": "ib-internal/namrata.mali_instabase.com/fs/Instabase Drive/aihub/0193d938-8a8c-70c3-ad0b-35e11e344039/project/modules/scripts/REFINER/4d9cac0b-9cf8-4a3f-8c3f-caaa24312704_output.json",
+            "name": "findMax",
+            "project_uuid": "0193d938-8a8c-70c3-ad0b-35e11e344039",
+            "return_type": "string",
+            "scripts_full_path": "ib-internal/namrata.mali_instabase.com/fs/Instabase Drive/aihub/0193d938-8a8c-70c3-ad0b-35e11e344039/project/modules/scripts/REFINER/4d9cac0b-9cf8-4a3f-8c3f-caaa24312704.json",
+            "type": "REFINER"
+        },
+        "5370": {
+            "args": [
+                {
+                    "data_type": "FIELD",
+                    "name": "Rent_Roll_Table",
+                    "value": "Rent Roll Table"
+                }
+            ],
+            "code": "\n\ndef findAvg(Rent_Roll_Table, context = {}, keys = {}, **kwargs):\n\timport json, re, statistics\n\t\n\tRent_Roll_Table = json.loads(Rent_Roll_Table)\n\t\n\trent_list = []\n\tfor row in Rent_Roll_Table:\n\t  gross_rent = row[\"Gross Rent per sqft\"]\n\t  if gross_rent in [\"null\",\"N/A\"] or not gross_rent:\n\t    continue\n\t  gross_rent = re.sub('[\\$),]', '', gross_rent)\n\t  gross_rent = re.sub('\\(', '-', gross_rent)\n\t  \n\t  try:\n\t    gross_rent = float(gross_rent)\n\t    rent_list.append(gross_rent)\n\t  except Exception as e:\n\t    print(e)\n\t\n\tresult = statistics.mean(rent_list)\n\tresult = f'${result:,.2f}'\n\t\n\tprint(result)\n\treturn result ",
+            "docstring": null,
+            "function_code": "\timport json, re, statistics\n\t\n\tRent_Roll_Table = json.loads(Rent_Roll_Table)\n\t\n\trent_list = []\n\tfor row in Rent_Roll_Table:\n\t  gross_rent = row[\"Gross Rent per sqft\"]\n\t  if gross_rent in [\"null\",\"N/A\"] or not gross_rent:\n\t    continue\n\t  gross_rent = re.sub('[\\$),]', '', gross_rent)\n\t  gross_rent = re.sub('\\(', '-', gross_rent)\n\t  \n\t  try:\n\t    gross_rent = float(gross_rent)\n\t    rent_list.append(gross_rent)\n\t  except Exception as e:\n\t    print(e)\n\t\n\tresult = statistics.mean(rent_list)\n\tresult = f'${result:,.2f}'\n\t\n\tprint(result)\n\treturn result ",
+            "id": 5370,
+            "lambda_udf_id": "v1:AWS_LAMBDA:2609937526:insaprd-use2-aihub-prd-docker-default-udf:8",
+            "most_recent_results_path": "ib-internal/namrata.mali_instabase.com/fs/Instabase Drive/aihub/0193d938-8a8c-70c3-ad0b-35e11e344039/project/modules/scripts/REFINER/adc45181-7855-4fa8-a062-b8d9b579e8b4_output.json",
+            "name": "findAvg",
+            "project_uuid": "0193d938-8a8c-70c3-ad0b-35e11e344039",
+            "return_type": "string",
+            "scripts_full_path": "ib-internal/namrata.mali_instabase.com/fs/Instabase Drive/aihub/0193d938-8a8c-70c3-ad0b-35e11e344039/project/modules/scripts/REFINER/adc45181-7855-4fa8-a062-b8d9b579e8b4.json",
+            "type": "REFINER"
+        },
+        "5371": {
+            "args": [
+                {
+                    "data_type": "FIELD",
+                    "name": "Rent_Roll_Table",
+                    "value": "Rent Roll Table"
+                }
+            ],
+            "code": "\n\ndef findMin(Rent_Roll_Table, context = {}, keys = {}, **kwargs):\n\timport json, re\n\tRent_Roll_Table = json.loads(Rent_Roll_Table)\n\trent_list = []\n\tfor row in Rent_Roll_Table:\n\t  gross_rent = row[\"Gross Rent\"]\n\t  if gross_rent in  [\"null\",\"N/A\"] or not gross_rent:\n\t    continue\n\t  gross_rent = re.sub('[\\$),]', '', gross_rent)\n\t  gross_rent = re.sub('\\(', '-', gross_rent)\n\t  try:\n\t    gross_rent = float(gross_rent)\n\t    rent_list.append(gross_rent)\n\t  except Exception as e:\n\t    print(e)\n\tresult = min(rent_list)\n\tresult = f'${result:,.2f}'\n\treturn result",
+            "docstring": null,
+            "function_code": "\timport json, re\n\tRent_Roll_Table = json.loads(Rent_Roll_Table)\n\trent_list = []\n\tfor row in Rent_Roll_Table:\n\t  gross_rent = row[\"Gross Rent\"]\n\t  if gross_rent in  [\"null\",\"N/A\"] or not gross_rent:\n\t    continue\n\t  gross_rent = re.sub('[\\$),]', '', gross_rent)\n\t  gross_rent = re.sub('\\(', '-', gross_rent)\n\t  try:\n\t    gross_rent = float(gross_rent)\n\t    rent_list.append(gross_rent)\n\t  except Exception as e:\n\t    print(e)\n\tresult = min(rent_list)\n\tresult = f'${result:,.2f}'\n\treturn result",
+            "id": 5371,
+            "lambda_udf_id": "v1:AWS_LAMBDA:5128853174:insaprd-use2-aihub-prd-docker-default-udf:8",
+            "most_recent_results_path": "ib-internal/namrata.mali_instabase.com/fs/Instabase Drive/aihub/0193d938-8a8c-70c3-ad0b-35e11e344039/project/modules/scripts/REFINER/631fbe98-8fe8-40f3-9da0-0587548d663a_output.json",
+            "name": "findMin",
+            "project_uuid": "0193d938-8a8c-70c3-ad0b-35e11e344039",
+            "return_type": "string",
+            "scripts_full_path": "ib-internal/namrata.mali_instabase.com/fs/Instabase Drive/aihub/0193d938-8a8c-70c3-ad0b-35e11e344039/project/modules/scripts/REFINER/631fbe98-8fe8-40f3-9da0-0587548d663a.json",
+            "type": "REFINER"
+        }
+    },
+    "project_validations": [
+        {
+            "affected_fields": [
+                343509
+            ],
+            "alert_level": "FAILURE",
+            "created_at": 1734516185000,
+            "description": "",
+            "id": 5044,
+            "input_fields": [
+                343509
+            ],
+            "name": "Rule 1",
+            "params": {
+                "confidence_threshold": 0.8
+            },
+            "scope": "FIELD",
+            "type": "CONFIDENCE",
+            "updated_at": 1738148331000
+        },
+        {
+            "affected_fields": [
+                343510
+            ],
+            "alert_level": "FAILURE",
+            "created_at": 1734516185000,
+            "description": "",
+            "id": 5045,
+            "input_fields": [
+                343510
+            ],
+            "name": "Rule 2",
+            "params": {
+                "confidence_threshold": 0.9
+            },
+            "scope": "FIELD",
+            "type": "CONFIDENCE",
+            "updated_at": 1734516185000
+        },
+        {
+            "affected_fields": [
+                343511
+            ],
+            "alert_level": "FAILURE",
+            "created_at": 1738150178000,
+            "description": "",
+            "id": 5693,
+            "input_fields": [
+                343511
+            ],
+            "name": "Rule 3",
+            "params": {
+                "confidence_threshold": 0.75
+            },
+            "scope": "FIELD",
+            "type": "CONFIDENCE",
+            "updated_at": 1738227656000
+        },
+        {
+            "affected_fields": [
+                343512
+            ],
+            "alert_level": "FAILURE",
+            "created_at": 1738599575000,
+            "description": "",
+            "id": 5753,
+            "input_fields": [
+                343512
+            ],
+            "name": "Rule 4",
+            "params": {
+                "confidence_threshold": 0.85
+            },
+            "scope": "FIELD",
+            "type": "CONFIDENCE",
+            "updated_at": 1738599575000
+        }
+    ],
+    "reader_profile": {
+        "createdBy": "",
+        "createdOn": 1732109545178,
+        "defaultProfile": "",
+        "foundationVersion": "",
+        "inputPath": null,
+        "lastModifiedBy": "",
+        "lastModifiedOn": 1732109545178,
+        "outputPath": null,
+        "profiles": [
+            {
+                "entitySettings": [],
+                "name": "aihub",
+                "readSettings": {
+                    "add_barcode_identifier": true,
+                    "cache_pdf_results": false,
+                    "correct_inversion": false,
+                    "correct_orientation": false,
+                    "correct_resolution": false,
+                    "correct_resolution_auto": false,
+                    "detect_barcodes": false,
+                    "detect_blurry_files": false,
+                    "dewarp_page": true,
+                    "document_mapping": "document_is_record_skip_empty_page",
+                    "enable_ibdoc_v2": true,
+                    "enable_paragraph_ordering": false,
+                    "enable_table_markdown_enrichment": false,
+                    "encryption_config": null,
+                    "entity_models": [
+                        {
+                            "model_name": "signature_model",
+                            "model_version": "0.0.4"
+                        },
+                        {
+                            "model_name": "barcode_qrcode_detection",
+                            "model_version": "1.0.0"
+                        }
+                    ],
+                    "extract_all_pdf_layers": false,
+                    "find_lines": false,
+                    "fonts": null,
+                    "force_image_ocr": true,
+                    "image_filters": null,
+                    "languages": [
+                        "en"
+                    ],
+                    "layout_algorithm": "layout_algo_spatial",
+                    "model_specific_settings": {
+                        "marx_v1": {
+                            "version": "layout_v3"
+                        }
+                    },
+                    "native_excel_processing": true,
+                    "ocr_page_type": "marx",
+                    "ocr_timeout": null,
+                    "output_format_layout": "layout_per_page",
+                    "output_formats": null,
+                    "page_range_str": "",
+                    "preprocess_excel_files": false,
+                    "process_type": "auto_to_txt",
+                    "produce_metadata_list": true,
+                    "produce_word_metadata": true,
+                    "remove_boxes": false,
+                    "remove_boxes_over_height_percent": null,
+                    "remove_boxes_over_width_percent": null,
+                    "remove_space_wordpolys": true,
+                    "remove_vertical_text": false,
+                    "reorient_words": false,
+                    "repair_pdfs": false,
+                    "scripts_dir": "",
+                    "write_converted_image": true,
+                    "write_thumbnail": true
+                }
+            }
+        ],
+        "schema": "1"
+    }
+}

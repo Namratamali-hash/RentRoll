@@ -1,0 +1,104 @@
+{
+    "5368": {
+        "args": [
+            {
+                "data_type": "LINE",
+                "name": "previous_line",
+                "value": "Property Name@0"
+            }
+        ],
+        "code": "\tif not previous_line:\n\t  return \"N/A\"\n\treturn previous_line",
+        "docstring": null,
+        "lambda_end_of_life": null,
+        "lambda_id": "9",
+        "lambda_udf_id": "v1:AWS_LAMBDA:2014121279:insaprd-use2-aihub-prd-docker-default-udf:8",
+        "last_updated_at": "1734516184000",
+        "name": "none_to_na",
+        "udf_type": "REFINER"
+    },
+    "5369": {
+        "args": [
+            {
+                "data_type": "FIELD",
+                "name": "Rent_Roll_Table",
+                "value": "Rent Roll Table"
+            }
+        ],
+        "code": "\timport re, json\n\t\n\tRent_Roll_Table = json.loads(Rent_Roll_Table)\n\t\n\trent_list = []\n\tfor row in Rent_Roll_Table:\n\t  gross_rent = row[\"Gross Rent\"]\n\t  if gross_rent in [\"null\", \"N/A\"] or not gross_rent:\n\t    continue\n\t  gross_rent = re.sub('[\\$),]', '', gross_rent)\n\t  gross_rent = re.sub('\\(', '-', gross_rent)\n\t  \n\t  try:\n\t    gross_rent = float(gross_rent)\n\t    rent_list.append(gross_rent)\n\t  except Exception as e:\n\t    print(e)\n\t\n\tresult = max(rent_list)\n\tresult = f'${result:,.2f}'\n\t\n\treturn result",
+        "docstring": null,
+        "lambda_end_of_life": null,
+        "lambda_id": "9",
+        "lambda_udf_id": "v1:AWS_LAMBDA:8581666418:insaprd-use2-aihub-prd-docker-default-udf:8",
+        "last_updated_at": "1734516185000",
+        "name": "findMax",
+        "udf_type": "REFINER"
+    },
+    "5370": {
+        "args": [
+            {
+                "data_type": "FIELD",
+                "name": "Rent_Roll_Table",
+                "value": "Rent Roll Table"
+            }
+        ],
+        "code": "\timport json, re, statistics\n\t\n\tRent_Roll_Table = json.loads(Rent_Roll_Table)\n\t\n\trent_list = []\n\tfor row in Rent_Roll_Table:\n\t  gross_rent = row[\"Gross Rent per sqft\"]\n\t  if gross_rent in [\"null\",\"N/A\"] or not gross_rent:\n\t    continue\n\t  gross_rent = re.sub('[\\$),]', '', gross_rent)\n\t  gross_rent = re.sub('\\(', '-', gross_rent)\n\t  \n\t  try:\n\t    gross_rent = float(gross_rent)\n\t    rent_list.append(gross_rent)\n\t  except Exception as e:\n\t    print(e)\n\t\n\tresult = statistics.mean(rent_list)\n\tresult = f'${result:,.2f}'\n\t\n\tprint(result)\n\treturn result ",
+        "docstring": null,
+        "lambda_end_of_life": null,
+        "lambda_id": "9",
+        "lambda_udf_id": "v1:AWS_LAMBDA:2609937526:insaprd-use2-aihub-prd-docker-default-udf:8",
+        "last_updated_at": "1734516185000",
+        "name": "findAvg",
+        "udf_type": "REFINER"
+    },
+    "5371": {
+        "args": [
+            {
+                "data_type": "FIELD",
+                "name": "Rent_Roll_Table",
+                "value": "Rent Roll Table"
+            }
+        ],
+        "code": "\timport json, re\n\tRent_Roll_Table = json.loads(Rent_Roll_Table)\n\trent_list = []\n\tfor row in Rent_Roll_Table:\n\t  gross_rent = row[\"Gross Rent\"]\n\t  if gross_rent in  [\"null\",\"N/A\"] or not gross_rent:\n\t    continue\n\t  gross_rent = re.sub('[\\$),]', '', gross_rent)\n\t  gross_rent = re.sub('\\(', '-', gross_rent)\n\t  try:\n\t    gross_rent = float(gross_rent)\n\t    rent_list.append(gross_rent)\n\t  except Exception as e:\n\t    print(e)\n\tresult = min(rent_list)\n\tresult = f'${result:,.2f}'\n\treturn result",
+        "docstring": null,
+        "lambda_end_of_life": null,
+        "lambda_id": "9",
+        "lambda_udf_id": "v1:AWS_LAMBDA:5128853174:insaprd-use2-aihub-prd-docker-default-udf:8",
+        "last_updated_at": "1738741445000",
+        "name": "findMin",
+        "udf_type": "REFINER"
+    },
+    "6068": {
+        "args": [
+            {
+                "data_type": "FIELD",
+                "name": "Building_ID",
+                "value": "Building ID"
+            }
+        ],
+        "code": "\t# Import Python packages\n\t# import json\n\t\n\t# Log statements using print()\n\t# print(\"This will appear in the logs\")\n\t\n\tif Building_ID:\n\t\t# Return None to indicate validation passed\n\t\treturn None\n\telse:\n\t\t# Return a string to indicate validation failed\n\t\treturn \"Error: Building_ID is empty\"",
+        "docstring": null,
+        "lambda_end_of_life": null,
+        "lambda_id": "9",
+        "lambda_udf_id": "v1:AWS_LAMBDA:3329233209:insaprd-use2-aihub-prd-docker-default-udf:8",
+        "last_updated_at": "1738054390000",
+        "name": "unnamed_custom_function",
+        "udf_type": "VALIDATIONS"
+    },
+    "6138": {
+        "args": [
+            {
+                "data_type": "LINE",
+                "name": "previous_line",
+                "value": "Rent Roll Table@0"
+            }
+        ],
+        "code": "\timport json\n\tdata = json.loads(previous_line)\n\tkey_order = [\"Unit Number\", \"Tenant Name\", \"GLA\", \"Lease Start date\", \"Lease End Date\",\n\t        \"Lease Type\", \"Gross Rent\", \"Base Rent\", \"Gross Rent Per SqFT\",\n\t        \"Rent Roll Date\", \"Building ID\"]\n\tfor record in data:\n\t    reordered_record = {\n\t        key: \"N/A\" if not record.get(key) or record.get(key) == \"null\" else record[key]\n\t        for key in key_order\n\t    }\n\t    for key in record.keys():\n\t        if key not in reordered_record:\n\t            reordered_record[key] = \"N/A\" if record[key] is None or record[key] == \"null\" else record[key]\n\t    record.clear()\n\t    record.update(reordered_record)\n\toutput = json.dumps(data, indent=4)\n\treturn output",
+        "docstring": null,
+        "lambda_end_of_life": null,
+        "lambda_id": "9",
+        "lambda_udf_id": "v1:AWS_LAMBDA:6453434492:insaprd-use2-aihub-prd-docker-default-udf:8",
+        "last_updated_at": "1738602756000",
+        "name": "Order_function",
+        "udf_type": "REFINER"
+    }
+}
