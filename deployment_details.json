@@ -1,0 +1,23 @@
+{
+    "app_name": "Copy of Rent Rolls App",
+    "app_version": "0.0.56",
+    "created_at_ms": 1739358198000,
+    "deployed_solution_id": "fe446707-8090-4157-94f9-03f42541ee54",
+    "description": "Rentroll",
+    "human_review_level": "doc_based",
+    "human_review_mode": "ON",
+    "id": "0194f9d3-d724-71a5-a175-3e1916decd7a",
+    "last_run_job_id": null,
+    "last_run_status": null,
+    "last_run_timestamp_ns": null,
+    "metric_alerts": null,
+    "name": "Rentroll",
+    "notification_emails": null,
+    "owner": "namrata.mali_instabase.com",
+    "retention_settings": {},
+    "review_within_sec": null,
+    "state": "ACTIVE",
+    "updated_at_ms": 1739358198000,
+    "webhooks": null,
+    "workspace": "namrata.mali_instabase.com"
+}

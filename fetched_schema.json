@@ -1,0 +1,234 @@
+{
+    "115360": {
+        "description": "Rent details for a single property building",
+        "fields": {
+            "343509": {
+                "data_type": "TEXT",
+                "description": "return name of all the properties mentioned in \"id - name\" format",
+                "lines": [
+                    {
+                        "function_args": [],
+                        "function_id": null,
+                        "line_type": "PROMPT",
+                        "native_fn_name": null,
+                        "prompt": "Remove dash and everything present before dash.\nAvoid duplication."
+                    },
+                    {
+                        "function_args": [],
+                        "function_id": null,
+                        "line_type": "PROMPT",
+                        "native_fn_name": null,
+                        "prompt": "Avoid the item which only contains numbers."
+                    }
+                ],
+                "model_type": "ADVANCED",
+                "name": "Property Name",
+                "position": 0,
+                "prompt": "Extract all Property Names from the rent roll document. It is also can be present as address.\nIf not present extract N/A.",
+                "prompt_schema": null,
+                "prompt_type": "advanced"
+            },
+            "343510": {
+                "data_type": "TEXT",
+                "description": "Rent Roll Date also found labelled 'As of Date'",
+                "lines": [
+                    {
+                        "function_args": [
+                            {
+                                "data_type": "TEXT",
+                                "name": "input__format",
+                                "value": "\"\""
+                            },
+                            {
+                                "data_type": "TEXT",
+                                "name": "output__format",
+                                "value": "\"mmddyyyy\""
+                            }
+                        ],
+                        "function_id": null,
+                        "line_type": "NATIVE",
+                        "native_fn_name": "format_date",
+                        "prompt": null
+                    }
+                ],
+                "model_type": "DEFAULT",
+                "name": "Rent Roll Date",
+                "position": 2,
+                "prompt": "Rent Roll Date",
+                "prompt_schema": null,
+                "prompt_type": "basic"
+            },
+            "343511": {
+                "data_type": "TEXT_LIST",
+                "description": "Extract all building Ids from tables. These are present in the table and under \"Property\" column header.",
+                "lines": [
+                    {
+                        "function_args": [],
+                        "function_id": null,
+                        "line_type": "PROMPT",
+                        "native_fn_name": null,
+                        "prompt": "Remove Duplicates. \nRemove property name if extracted."
+                    }
+                ],
+                "model_type": "DEFAULT",
+                "name": "Building ID",
+                "position": 1,
+                "prompt": "Building ID",
+                "prompt_schema": null,
+                "prompt_type": "basic"
+            },
+            "343512": {
+                "data_type": "TEXT",
+                "description": "Extract all tables from this document",
+                "lines": [
+                    {
+                        "function_args": [],
+                        "function_id": null,
+                        "line_type": "PROMPT",
+                        "native_fn_name": null,
+                        "prompt": "Give output as a single table. Add rows which contains integer in property column."
+                    }
+                ],
+                "model_type": "ADVANCED",
+                "name": "Rent Roll Table",
+                "position": 3,
+                "prompt": "Extract all tables from this document.",
+                "prompt_schema": null,
+                "prompt_type": "advanced"
+            },
+            "343513": {
+                "data_type": "TEXT",
+                "description": "",
+                "lines": [
+                    {
+                        "function_args": [
+                            {
+                                "data_type": "FIELD",
+                                "name": "Rent_Roll_Table",
+                                "value": "Rent Roll Table"
+                            }
+                        ],
+                        "function_id": 5369,
+                        "line_type": "UDF",
+                        "native_fn_name": null,
+                        "prompt": null
+                    }
+                ],
+                "model_type": "DEFAULT",
+                "name": "Max Rent",
+                "position": 4,
+                "prompt": "",
+                "prompt_schema": null,
+                "prompt_type": "udf"
+            },
+            "343514": {
+                "data_type": "TEXT",
+                "description": "",
+                "lines": [
+                    {
+                        "function_args": [
+                            {
+                                "data_type": "FIELD",
+                                "name": "Rent_Roll_Table",
+                                "value": "Rent Roll Table"
+                            }
+                        ],
+                        "function_id": 5370,
+                        "line_type": "UDF",
+                        "native_fn_name": null,
+                        "prompt": null
+                    }
+                ],
+                "model_type": "DEFAULT",
+                "name": "Average Rent per SqFt",
+                "position": 6,
+                "prompt": "",
+                "prompt_schema": null,
+                "prompt_type": "udf"
+            },
+            "343515": {
+                "data_type": "TEXT",
+                "description": "",
+                "lines": [
+                    {
+                        "function_args": [
+                            {
+                                "data_type": "FIELD",
+                                "name": "Rent_Roll_Table",
+                                "value": "Rent Roll Table"
+                            }
+                        ],
+                        "function_id": 5371,
+                        "line_type": "UDF",
+                        "native_fn_name": null,
+                        "prompt": null
+                    }
+                ],
+                "model_type": "DEFAULT",
+                "name": "Min Rent",
+                "position": 5,
+                "prompt": "",
+                "prompt_schema": null,
+                "prompt_type": "udf"
+            },
+            "412196": {
+                "data_type": "TEXT",
+                "description": "",
+                "lines": [
+                    {
+                        "function_args": [
+                            {
+                                "data_type": "FIELD",
+                                "name": "Rent_Roll_Table",
+                                "value": "Rent Roll Table"
+                            }
+                        ],
+                        "function_id": null,
+                        "line_type": "PROMPT",
+                        "native_fn_name": null,
+                        "prompt": "Find only minimum rent form \"Gross Rent\" column of \\ Rent Roll Table \\<br>"
+                    }
+                ],
+                "model_type": "DEFAULT",
+                "name": "Minimun rent",
+                "position": 7,
+                "prompt": "",
+                "prompt_schema": null,
+                "prompt_type": "derived"
+            },
+            "412957": {
+                "data_type": "TEXT",
+                "description": "",
+                "lines": [
+                    {
+                        "function_args": [
+                            {
+                                "data_type": "FIELD",
+                                "name": "Rent_Roll_Table",
+                                "value": "Rent Roll Table"
+                            }
+                        ],
+                        "function_id": null,
+                        "line_type": "PROMPT",
+                        "native_fn_name": null,
+                        "prompt": "Consider \"Gross Rent\" column of \\ Rent Roll Table \\ and extract maximum rent value from column."
+                    }
+                ],
+                "model_type": "DEFAULT",
+                "name": "Maximum Rent",
+                "position": 8,
+                "prompt": "",
+                "prompt_schema": null,
+                "prompt_type": "derived"
+            }
+        },
+        "name": "Rent Roll"
+    },
+    "115361": {
+        "description": "",
+        "fields": {},
+        "name": "Other"
+    },
+    "last_edited_at": "1739271522000",
+    "last_edited_class_at": "1734516185000"
+}

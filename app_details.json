@@ -1,0 +1,23 @@
+{
+    "appReleaseVersion": "25.02",
+    "author": "namrata.mali_instabase.com",
+    "createdAtMs": "1739294059000",
+    "description": "No release notes",
+    "id": "fe446707-8090-4157-94f9-03f42541ee54",
+    "isCustomizable": false,
+    "linkSharingMode": "OFF",
+    "metadata": "{\"authors\": [\"namrata.mali_instabase.com\"], \"icon\": \"icon.png\", \"samples\": \"\", \"results\": \"\", \"schema\": \"schema.json\", \"project_id\": \"0193d938-8a8c-70c3-ad0b-35e11e344039\", \"billing_model\": \"default\", \"has_project_snapshot\": true, \"org_context_type\": \"ENTERPRISE\"}",
+    "name": "Copy of Rent Rolls App",
+    "owner": "namrata.mali_instabase.com",
+    "sharedAccounts": [
+        "ib-internal"
+    ],
+    "solutionType": "EXTRACTION",
+    "solution_path": "system/global/fs/Instabase Drive/Applications/Deployed/All/fe446707-8090-4157-94f9-03f42541ee54",
+    "state": "ACTIVE",
+    "summary": "No summary",
+    "updateMode": "UPDATE_WHEN_EXPIRED",
+    "updatedAtMs": "1739294164000",
+    "version": "0.0.56",
+    "visibility": "PRIVATE"
+}

@@ -1,0 +1,81 @@
+{
+    "last_updated": 1738599575000,
+    "rules": [
+        {
+            "affected_fields": [
+                343509
+            ],
+            "alert_level": "FAILURE",
+            "created_at": 1734516185000,
+            "description": "",
+            "id": 5044,
+            "input_fields": [
+                343509
+            ],
+            "name": "Rule 1",
+            "params": {
+                "confidence_threshold": 0.8
+            },
+            "scope": "FIELD",
+            "type": "CONFIDENCE",
+            "updated_at": 1738148331000
+        },
+        {
+            "affected_fields": [
+                343510
+            ],
+            "alert_level": "FAILURE",
+            "created_at": 1734516185000,
+            "description": "",
+            "id": 5045,
+            "input_fields": [
+                343510
+            ],
+            "name": "Rule 2",
+            "params": {
+                "confidence_threshold": 0.9
+            },
+            "scope": "FIELD",
+            "type": "CONFIDENCE",
+            "updated_at": 1734516185000
+        },
+        {
+            "affected_fields": [
+                343511
+            ],
+            "alert_level": "FAILURE",
+            "created_at": 1738150178000,
+            "description": "",
+            "id": 5693,
+            "input_fields": [
+                343511
+            ],
+            "name": "Rule 3",
+            "params": {
+                "confidence_threshold": 0.75
+            },
+            "scope": "FIELD",
+            "type": "CONFIDENCE",
+            "updated_at": 1738227656000
+        },
+        {
+            "affected_fields": [
+                343512
+            ],
+            "alert_level": "FAILURE",
+            "created_at": 1738599575000,
+            "description": "",
+            "id": 5753,
+            "input_fields": [
+                343512
+            ],
+            "name": "Rule 4",
+            "params": {
+                "confidence_threshold": 0.85
+            },
+            "scope": "FIELD",
+            "type": "CONFIDENCE",
+            "updated_at": 1738599575000
+        }
+    ]
+}
