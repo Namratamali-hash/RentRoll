@@ -1,0 +1,25 @@
+{
+  "source": {
+    "is_advanced": false, 
+    "project_id": "0193d938-8a8c-70c3-ad0b-35e11e344039",
+    "flow_path": "",
+    "sb_name": "",
+    "flow_name": "",
+    "org": "ib-internal",
+    "workspace": "namrata.mali_instabase.com",
+    "app_id": "fe446707-8090-4157-94f9-03f42541ee54",
+    "deployment_id": "0194f9d3-d724-71a5-a175-3e1916decd7a",
+    "dependencies": [""]
+  },
+  "target": {
+    "org": "SolEng",
+    "workspace": "CI-CD"
+  },
+  "settings": {
+    "rebuild": false
+  },
+  "testing": {
+    "regression": {}
+  },
+  "release_notes": "New"
+}
